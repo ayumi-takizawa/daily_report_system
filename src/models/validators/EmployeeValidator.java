@@ -1,4 +1,4 @@
-package models.validator;
+package models.validators;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class EmployeeValidator {
     public static List<String> validate(Employee e,Boolean code_duplicate_check_flag, Boolean password_check_flag){
         List<String> errors=new ArrayList<String>();
 
-        String code_error=_validateCode(e.getCode(),code_duplicate_check_flag);
+        String code_error=_validateCode(e.getCode(),code_duplicate_check_flag);     //
         if(!code_error.equals("")){
             errors.add(code_error);
         }

@@ -1,4 +1,4 @@
-package controllers.employee;
+package controllers.employees;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

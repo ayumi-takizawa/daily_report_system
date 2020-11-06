@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
      */
     //ログイン画面を表示
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("_token",  request.getSession().getId());
+        request.setAttribute("_token",  request.getSession().getId());    //_token=csrfトークン
         request.setAttribute("hasError",  false);
         if(request.getSession().getAttribute("flush") != null){
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-        if(!check_result){
+        if(!check_result){     //falseの時
             //認証できなかったらログイン画面に戻る
             request.setAttribute("_token",request.getSession().getId());
             request.setAttribute("hasError", true);

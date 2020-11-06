@@ -19,10 +19,10 @@ import javax.persistence.Table;
 @NamedQueries({
 @NamedQuery(
     name="getAllReports",
-            query="SELECt r FROM Report AS r ORDER BY r.id DESC"
+            query="SELECT r FROM Report AS r ORDER BY r.id DESC"
             ),
 @NamedQuery(
-        name="getReportsContent",
+        name="getReportsCount",
         query="SELECT COUNT(r) FROM Report AS r"
         ),
 })

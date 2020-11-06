@@ -74,6 +74,7 @@ public class LoginFilter implements Filter {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
                 }
+                //ログインしているのにログインページを表示させる理由がない。そのようなアクセスがあった場合はトップページへリダイレクト
             }
         }
 

@@ -1,4 +1,4 @@
-package controllers.reports;
+package controllers.reaction;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,22 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
 import models.Reaction;
 import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsShowServlet
+ * Servlet implementation class GoodShow
  */
-@WebServlet("/reports/show")
-public class ReportsShowServlet extends HttpServlet {
+@WebServlet("/reactions/good/show")
+public class GoodShow extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsShowServlet() {
+    public GoodShow() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,28 +38,21 @@ public class ReportsShowServlet extends HttpServlet {
 
         Report rp = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
         Reaction ra=em.find(Reaction.class, Integer.parseInt(request.getParameter("id")));
-        Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
 
-        long good_count = (long)em.createNamedQuery("getGoodCount", Long.class)
+        //Report report_id = (Employee)request.getSession().getAttribute("login_employee");
+
+        List<Reaction> getAllGood=em.createNamedQuery("getMyAllGood",Reaction.class)
                 .setParameter("report", rp)
-                .getSingleResult();
-
-        List<Reaction> goodCheck=em.createNamedQuery("checkGood_flag",Reaction.class)
-                .setParameter("employee", login_employee)
-                .setParameter("report",rp)
                 .getResultList();
-
 
         em.close();
 
-
-        request.setAttribute("goodCheck",goodCheck);
-        request.setAttribute("reaction", ra);
         request.setAttribute("report", rp);
-        request.setAttribute("good_count",good_count);
+        request.setAttribute("reaction",ra);
+        request.setAttribute("getAllGood", getAllGood);
         request.setAttribute("_token", request.getSession().getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reactions/show.jsp");
         rd.forward(request,response);
     }
 

@@ -46,7 +46,7 @@ public class ReportsCreateServlet extends HttpServlet {
             r.setEmployee((Employee)request.getSession().getAttribute("login_employee"));
 
             //Stringで受け取った日付を Date 型へ変換する処理を行い、
-            //if文の条件式に rd_str != null && !rd_str.equals("") と記述することで、日付欄をわざと未入力にした場合、当日の日付を入れる
+            //if文の条件式に rd_str != null && !rd_str.equals("") で、日付欄をわざと未入力にした場合、当日の日付を入れる
             Date report_date = new Date(System.currentTimeMillis());
             String rd_str = request.getParameter("report_date");
             if(rd_str != null && !rd_str.equals("")) {
@@ -73,7 +73,7 @@ public class ReportsCreateServlet extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 em.getTransaction().begin();
-                em.persist(r);
+                em.persist(r);//新規登録
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("flush", "登録が完了しました。");

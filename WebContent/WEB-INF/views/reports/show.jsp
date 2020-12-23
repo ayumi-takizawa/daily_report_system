@@ -58,7 +58,6 @@
                              : <a href="<c:url value='/reactions/good/show?id=${report.id}'/>">${good_count}</a>
                         </p>
 
-                        </p>
                     </c:otherwise>
                 </c:choose>
                 <form method="POST" action="<c:url value='/reactions/good/set'/>">
